@@ -38,13 +38,14 @@ jobs:
         run: |
           dotnet test "${{ github.workspace }}/PublicApi.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1.7.0
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: XUnit Tests            # Name of the check run which will be created
-          path: ${{ github.workspace }}/tests/UnitTests/TestResults/*.trx    # Path to test results
-          reporter: dotnet-trx
+#       UNCOMMENT TO SHOW CUSTOM ACTIONS
+#      - name: Test Report
+#        uses: dorny/test-reporter@v1.7.0
+#        if: success() || failure()    # run this step even if previous step failed
+#        with:
+#          name: XUnit Tests            # Name of the check run which will be created
+#          path: ${{ github.workspace }}/tests/UnitTests/TestResults/*.trx    # Path to test results
+#          reporter: dotnet-trx
 
       - name: Publish
         run: |
