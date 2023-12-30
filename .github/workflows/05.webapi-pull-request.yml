@@ -48,7 +48,7 @@ jobs:
 
       - name: Publish
         run: |
-          dotnet publish "${{ github.workspace }}/src/PublicApi.csproj" -c Release -o src/PublicApi
+          dotnet publish "${{ github.workspace }}/src/PublicApi/PublicApi.csproj" -c Release -o src/PublicApi
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
