@@ -38,7 +38,7 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: XUnit Tests            # Name of the check run which will be created
-          path: ${{ github.workspace }}/tests/TestResults/*.trx    # Path to test results
+          path: ${{ github.workspace }}/tests/UnitTests/TestResults/*.trx    # Path to test results
           reporter: dotnet-trx
 
       - name: Publish
