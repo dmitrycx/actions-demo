@@ -47,6 +47,11 @@ jobs:
 #          path: ${{ github.workspace }}/tests/UnitTests/TestResults/*.trx    # Path to test results
 #          reporter: dotnet-trx
 
+      - name: Label PR based on criteria
+        uses: dmitrycx/labeler@v1
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
+        
       - name: Publish
         run: |
           dotnet publish "${{ github.workspace }}/src/PublicApi/PublicApi.csproj" -c Release -o src/PublicApi
