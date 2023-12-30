@@ -48,7 +48,7 @@ jobs:
 #          reporter: dotnet-trx
 
       - name: Label PR based on criteria
-        uses: dmitrycx/labeler@v1
+        uses: dmitrycx/labeler@v1.0.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
         
