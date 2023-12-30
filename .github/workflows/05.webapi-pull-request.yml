@@ -48,9 +48,15 @@ jobs:
 #          reporter: dotnet-trx
 
       - name: Label PR based on criteria
+        id: labeler
         uses: dmitrycx/labeler@v1.0.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
+      - name: debug 
+        run: |
+          echo random-number ${{ steps.labeler.outputs.PR_NUMBER }}
+          echo random-number ${{ steps.labeler.outputs.PR_TITLE }}
+          echo random-number ${{ steps.labeler.outputs.PR_BODY }}
         
       - name: Publish
         run: |
