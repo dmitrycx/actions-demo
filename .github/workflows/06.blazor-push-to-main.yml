@@ -81,7 +81,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: 'Login via Azure CLI'
-        uses: azure/actions/login@v1
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -123,7 +123,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: 'Login via Azure CLI'
-        uses: azure/actions/login@v1
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -166,7 +166,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: 'Login via Azure CLI'
-        uses: azure/actions/login@v1
+        uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
