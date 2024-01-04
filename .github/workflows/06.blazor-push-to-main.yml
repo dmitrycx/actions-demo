@@ -45,7 +45,7 @@ jobs:
      
       - name: Publish
         run: |
-          dotnet publish "${{ github.workspace }}/blazorapp/src/BlazorApp/BlazorApp.csproj" -c Release -o src/BlazorApp
+          dotnet publish "${{ github.workspace }}/blazorapp/src/BlazorApp/BlazorApp.csproj" -c Release -o blazorapp
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
