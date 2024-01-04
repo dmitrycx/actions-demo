@@ -1,4 +1,4 @@
-name: Demo 05 - Push To Main
+name: Demo 06 - Push To Main
 
 on:
   workflow_dispatch:
@@ -84,7 +84,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: 'Login via Azure CLI'
-        uses: azure/login@v1
+        uses: azure/actions/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
