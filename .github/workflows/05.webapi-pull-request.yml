@@ -29,14 +29,14 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Install dependencies
-        run: dotnet restore "${{ github.workspace }}/PublicApi.sln"
+        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
 
       - name: Build
-        run: dotnet build "${{ github.workspace }}/PublicApi.sln" --configuration Release --no-restore
+        run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
 
       - name: Test
         run: |
-          dotnet test "${{ github.workspace }}/PublicApi.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
+          dotnet test "${{ github.workspace }}/blazorapp/BlazorApp.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
 
 #       UNCOMMENT TO SHOW CUSTOM ACTIONS
       - name: Test Report
@@ -44,7 +44,7 @@ jobs:
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: XUnit Tests            # Name of the check run which will be created
-          path: ${{ github.workspace }}/tests/UnitTests/TestResults/*.trx    # Path to test results
+          path: ${{ github.workspace }}/blazorapp/tests/UnitTests/TestResults/*.trx    # Path to test results
           reporter: dotnet-trx
 
       - name: Label PR based on criteria
@@ -55,18 +55,15 @@ jobs:
 #        
       - name: Publish
         run: |
-          dotnet publish "${{ github.workspace }}/src/PublicApi/PublicApi.csproj" -c Release -o src/PublicApi
+          dotnet publish "${{ github.workspace }}/blazorapp/src/BlazorApp/BlazorApp.csproj" -c Release -o src/BlazorApp
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
         with:
           # Artifact name
-          name: publicapibuildartifacts
+          name: blazorappbuildartifacts
           # A file, directory or wildcard pattern that describes what to upload
-          path: |
-            PublicApi.sln
-            src/**
-            tests/**
+          path: blazorapp/**
           # The desired behavior if no files are found using the provided path.
           if-no-files-found: error
           # Duration after which artifact will expire in days. 0 means using default retention.
