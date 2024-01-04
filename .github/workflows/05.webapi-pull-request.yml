@@ -11,11 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: read
-      checks: write
-    
     steps:
       
       # - name: Make PR Fail
@@ -52,7 +47,7 @@ jobs:
         uses: dmitrycx/labeler@v1.0.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
-        
+#        
       - name: Publish
         run: |
           dotnet publish "${{ github.workspace }}/src/PublicApi/PublicApi.csproj" -c Release -o src/PublicApi
