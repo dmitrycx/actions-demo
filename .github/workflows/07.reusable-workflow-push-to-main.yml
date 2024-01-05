@@ -26,3 +26,4 @@ jobs:
       env: DEV
     secrets:
       token: ${{ secrets.GH_TOKEN }}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
