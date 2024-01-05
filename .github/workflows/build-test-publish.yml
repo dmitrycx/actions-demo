@@ -1,4 +1,4 @@
-name: Build-Test-Deploy Blazor App
+name: Build-Test-Publish Blazor App
 
 on:
   workflow_call:

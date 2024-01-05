@@ -7,11 +7,21 @@ on:
       - main
 
 jobs:
-  build-test-deploy-app:
+  build-test-publish-app:
     permissions:
       id-token: write
       contents: read
       checks: write
-    uses: ./.github/workflows/build-test-deploy.yml
+    uses: ./.github/workflows/build-test-publish.yml
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
+      
+
+  deploy-DEV:
+    uses: ./.github/workflows/deploy-to-azure.yml
+    with:
+      url: 'https://blazorapp-actions-dev.azurewebsites.net'
+      slot: dev
+      env: DEV
     secrets:
       token: ${{ secrets.GH_TOKEN }}
