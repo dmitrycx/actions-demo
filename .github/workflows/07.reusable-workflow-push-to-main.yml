@@ -8,5 +8,5 @@ on:
 
 jobs:
   build-test-deploy-app:
-    uses: ./.github/workflows/build-test-deploy.yml@main
+    uses: ./.github/workflows/build-test-deploy.yml
     secrets: inherit
