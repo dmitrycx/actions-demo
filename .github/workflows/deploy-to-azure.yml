@@ -7,7 +7,7 @@ on:
         required: true
         type: string
       slot:
-        required: true
+        required: false
         type: string
       env:
         required: true
@@ -56,4 +56,4 @@ jobs:
         with:
           app-name: blazorapp-actions
           package: 'blazorappbuildartifacts'
-          slot-name: ${{ inputs.slot }}
+          slot-name: ${{ inputs.slot || ''}}

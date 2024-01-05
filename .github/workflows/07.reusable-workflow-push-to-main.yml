@@ -27,3 +27,26 @@ jobs:
     secrets:
       token: ${{ secrets.GH_TOKEN }}
       creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+  deploy-QA:
+    needs: build-test-publish-app
+    uses: ./.github/workflows/deploy-to-azure.yml
+    with:
+      url: 'https://blazorapp-actions-qa.azurewebsites.net'
+      slot: qa
+      env: QA
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+  deploy-PROD:
+    needs:
+      - deploy-DEV
+      - deploy-QA
+    uses: ./.github/workflows/deploy-to-azure.yml
+    with:
+      url: 'https://blazorapp-actions.azurewebsites.net'
+      env: PROD
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
