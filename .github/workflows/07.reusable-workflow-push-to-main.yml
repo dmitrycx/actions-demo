@@ -18,6 +18,7 @@ jobs:
       
 
   deploy-DEV:
+    needs: build-test-publish-app
     uses: ./.github/workflows/deploy-to-azure.yml
     with:
       url: 'https://blazorapp-actions-dev.azurewebsites.net'
