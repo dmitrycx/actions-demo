@@ -19,7 +19,7 @@ jobs:
       checks: write
       
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core 8
         uses: actions/setup-dotnet@v3
@@ -74,7 +74,7 @@ jobs:
       url: 'https://blazorapp-actions-dev.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core 8
         uses: actions/setup-dotnet@v3
@@ -116,7 +116,7 @@ jobs:
       url: 'https://blazorapp-actions-qa.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core 8
         uses: actions/setup-dotnet@v3
@@ -159,7 +159,7 @@ jobs:
       url: 'https://blazorapp-actions.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET Core 8
         uses: actions/setup-dotnet@v3
