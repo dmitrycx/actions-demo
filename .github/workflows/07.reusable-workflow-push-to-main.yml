@@ -13,4 +13,5 @@ jobs:
       contents: read
       checks: write
     uses: ./.github/workflows/build-test-deploy.yml
-    secrets: inherit
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}

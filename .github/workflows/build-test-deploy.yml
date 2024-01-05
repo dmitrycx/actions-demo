@@ -48,7 +48,7 @@ jobs:
         id: labeler
         uses: dmitrycx/labeler@v1.0.0
         with:
-          github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
+          github-token: ${{ secrets.token }}  # Use the secret as the input
 
       - name: Publish
         run: |
