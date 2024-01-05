@@ -1,6 +1,9 @@
 # demo project to showcase github actions
-detailed info in the separate markdown files
 
-run locally with act
-- act -j [job name] --input name=xxx --container-architecture linux/amd64 -W [path to workflow file]
-- https://github.com/nektos/act
+## useful links
+- https://docs.github.com/en/actions
+- [github training](https://githubpartners.learnupon.com/enrollments/193989458/details)
+- [run actions locally](https://github.com/nektos/act)
+
+## demo points
+detailed info in the separate markdown files
