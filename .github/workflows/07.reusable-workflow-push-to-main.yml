@@ -1,4 +1,4 @@
-name: Demo 06 - Push To Main
+name: Demo 07 - Reusable Workflow
 
 on:
   workflow_dispatch:
