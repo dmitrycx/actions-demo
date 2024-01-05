@@ -8,5 +8,9 @@ on:
 
 jobs:
   build-test-deploy-app:
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
     uses: ./.github/workflows/build-test-deploy.yml
     secrets: inherit
