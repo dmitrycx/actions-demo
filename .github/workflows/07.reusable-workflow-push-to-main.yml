@@ -1,0 +1,12 @@
+name: Demo 06 - Push To Main
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy-app:
+    uses: ./.github/workflows/build-test-deploy.yml@main
+    secrets: inherit

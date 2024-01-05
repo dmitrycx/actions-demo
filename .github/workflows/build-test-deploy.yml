@@ -1,0 +1,67 @@
+name: Build-Test-Deploy Blazor App
+
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: true
+
+jobs:
+  build-test-branch:
+    name: "Build and Test Of PR"
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+      checks: write
+    
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET Core 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install dependencies
+        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+
+      - name: Build
+        run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
+
+      - name: Test
+        run: |
+          dotnet test "${{ github.workspace }}/blazorapp/BlazorApp.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
+      
+      - name: Test Report
+        uses: dorny/test-reporter@v1.7.0
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: XUnit Tests            # Name of the check run which will be created
+          path: ${{ github.workspace }}/blazorapp/tests/UnitTests/TestResults/*.trx    # Path to test results
+          reporter: dotnet-trx
+
+      - name: Label PR based on criteria
+        id: labeler
+        uses: dmitrycx/labeler@v1.0.0
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
+
+      - name: Publish
+        run: |
+          dotnet publish "${{ github.workspace }}/blazorapp/src/BlazorApp/BlazorApp.csproj" -c Release -o blazorapp
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Artifact name
+          name: blazorappbuildartifacts
+          # A file, directory or wildcard pattern that describes what to upload
+          path: blazorapp/**
+          # The desired behavior if no files are found using the provided path.
+          if-no-files-found: error
+          # Duration after which artifact will expire in days. 0 means using default retention.
+          retention-days: 90
