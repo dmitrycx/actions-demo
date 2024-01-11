@@ -36,10 +36,10 @@ jobs:
         uses: actions/cache@v3.3.2
         with:
           path: |
-            ${{ github.workspace }}/blazorapp/src/**/obj/project.assets.json
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+            ${{ github.workspace }}/blazorapp/src/BlazorApp/bin
+          key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
-            nuget-${{ runner.os }}-
+            ${{ runner.os }}-nuget-cache-
 
       - name: Debug Cache
         run: |
