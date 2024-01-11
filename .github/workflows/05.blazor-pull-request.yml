@@ -46,6 +46,10 @@ jobs:
           echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
           ls -R ${{ github.workspace }}/blazorapp/src
       
+      - name: Debug Cache Key
+        run: |
+          echo "Cache Key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}"
+      
       - name: Install dependencies (if cache not found)
         if: steps.cache.outputs.cache-hit != 'true'
         run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
