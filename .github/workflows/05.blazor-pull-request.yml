@@ -40,6 +40,7 @@ jobs:
           path: |
             ~/.nuget/packages
             ${{ github.workspace }}/blazorapp/src/BlazorApp/bin
+            ${{ github.workspace }}/blazorapp/src/BlazorApp/obj
           key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
