@@ -38,9 +38,10 @@ jobs:
           path: |
             ${{ env.HOME }}/.nuget/packages
             ${{ github.workspace }}/blazorapp/src/**/obj/project.assets.json
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          key: nuget-${{ runner.os }}-${{ hashFiles('${{ github.workspace }}/blazorapp/**/*.csproj') }}
           restore-keys: |
             nuget-${{ runner.os }}-
+          debug: true
 
       - name: Install dependencies (if cache not found)
         if: steps.cache.outputs.cache-hit != 'true'
