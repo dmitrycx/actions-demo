@@ -28,9 +28,20 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Install dependencies
-        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
-
+#      - name: Install dependencies
+#        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+      
+#       UNCOMMENT TO SHOW CACHING
+      - name: Restore NuGet packages
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            ~/.nuget/packages
+            ~/src/**/obj/project.assets.json
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+#              
       - name: Build
         run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
 
