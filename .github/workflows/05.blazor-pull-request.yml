@@ -36,8 +36,8 @@ jobs:
         uses: actions/cache@v3.3.2
         with:
           path: |
-            ~/.nuget/packages
-            ~/src/**/obj/project.assets.json
+            ${{ env.HOME }}/.nuget/packages
+            ${{ github.workspace }}/blazorapp/src/**/obj/project.assets.json
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             nuget-${{ runner.os }}-
