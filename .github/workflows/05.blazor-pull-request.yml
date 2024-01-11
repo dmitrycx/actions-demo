@@ -36,13 +36,16 @@ jobs:
         uses: actions/cache@v3.3.2
         with:
           path: |
-            ${{ env.HOME }}/.nuget/packages
-            ${{ github.workspace }}/blazorapp/src/**/obj/project.assets.json
-          key: nuget-${{ runner.os }}-${{ hashFiles('${{ github.workspace }}/blazorapp/**/*.csproj') }}
+            ~/blazorapp/src/**/obj/project.assets.json
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             nuget-${{ runner.os }}-
-          debug: true
 
+      - name: Debug Cache
+        run: |
+          echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
+          ls -R ~/blazorapp/src
+      
       - name: Install dependencies (if cache not found)
         if: steps.cache.outputs.cache-hit != 'true'
         run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
