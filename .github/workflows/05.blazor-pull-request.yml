@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-test-branch:
-    name: "Build and Test Of PR"
+    name: "Build and Test PR"
 
     runs-on: ubuntu-latest
 
@@ -38,20 +38,12 @@ jobs:
         uses: actions/cache@v3.3.2
         with:
           path: |
+            ~/.nuget/packages
             ${{ github.workspace }}/blazorapp/src/BlazorApp/bin
           key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
             ${{ runner.os }}-nuget-cache-
-
-      - name: Debug Cache
-        run: |
-          echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
-          ls -R ${{ github.workspace }}/blazorapp/src
-      
-      - name: Debug Cache Key
-        run: |
-          echo "Cache Key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}"
       
       - name: Install dependencies (if cache not found)
         if: steps.cache-nuget.outputs.cache-hit != 'true'
