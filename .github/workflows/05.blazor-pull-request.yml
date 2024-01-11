@@ -34,6 +34,7 @@ jobs:
       
 #       UNCOMMENT TO SHOW CACHING
       - name: Restore NuGet packages
+        id: cache-nuget
         uses: actions/cache@v3.3.2
         with:
           path: |
@@ -45,7 +46,7 @@ jobs:
 
       - name: Debug Cache
         run: |
-          echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
+          echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
           ls -R ${{ github.workspace }}/blazorapp/src
       
       - name: Debug Cache Key
@@ -53,7 +54,7 @@ jobs:
           echo "Cache Key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}"
       
       - name: Install dependencies (if cache not found)
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-nuget.outputs.cache-hit != 'true'
         run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
 #              
       - name: Build
