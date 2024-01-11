@@ -41,6 +41,10 @@ jobs:
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             nuget-${{ runner.os }}-
+
+      - name: Install dependencies (if cache not found)
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
 #              
       - name: Build
         run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
