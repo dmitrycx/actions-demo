@@ -29,8 +29,33 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+#      - name: Install dependencies
+#        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+      
+      
+      #       UNCOMMENT TO SHOW CACHING
+      - name: Restore NuGet packages
+        id: cache-nuget
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            ${{ github.workspace }}/blazorapp/.nuget
+            ${{ github.workspace }}/blazorapp/**/obj
+            ${{ github.workspace }}/blazorapp/**/bin
+          key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
+            ${{ runner.os }}-nuget-cache-
+
+      - name: Debug Cache
+        run: |
+          echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
+          ls -R ${{ github.workspace }}/blazorapp
+
       - name: Install dependencies
-        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+        run: |
+          dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln" --packages .nuget --verbosity normal
+      #        
 
       - name: Build
         run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
