@@ -1,4 +1,4 @@
-name: Demo 07 - Reusable Workflow
+name: Demo 06 - Reusable Workflow
 
 on:
   workflow_dispatch:

@@ -1,7 +1,6 @@
-name: Demo 05 - Pull Request
+name: Demo 04 - Pull Request
 
 on:
-  workflow_dispatch: 
   pull_request:
     branches:
       - main

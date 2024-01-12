@@ -1,11 +1,10 @@
-name: Demo 06 - Push To Main
+name: Demo 05 - Push To Main
 
 on:
   workflow_dispatch:
-#  comment out for the demo
-#  push:
-#    branches:
-#      - main
+  push:
+    branches:
+      - main
 
 jobs:
   build-app:
