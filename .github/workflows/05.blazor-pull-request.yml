@@ -39,8 +39,10 @@ jobs:
         with:
           path: |
             ~/.nuget/packages
-            ${{ github.workspace }}/blazorapp/**/bin
-            ${{ github.workspace }}/blazorapp/**/obj
+            ${{ github.workspace }}/blazorapp/src/BlazorApp/bin
+            ${{ github.workspace }}/blazorapp/src/BlazorApp/obj
+            ${{ github.workspace }}/blazorapp/tests/UnitTests/bin
+            ${{ github.workspace }}/blazorapp/tests/UnitTests/obj
           key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
