@@ -29,41 +29,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-#      - name: Install dependencies
-#        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
-      
-#       UNCOMMENT TO SHOW CACHING
-      - name: Restore NuGet packages
-        id: cache-nuget
-        uses: actions/cache@v3.3.2
-        with:
-          path: |
-            ~/.nuget/packages
-            ${{ github.workspace }}/blazorapp/src/BlazorApp/bin
-            ${{ github.workspace }}/blazorapp/src/BlazorApp/obj
-            ${{ github.workspace }}/blazorapp/tests/UnitTests/bin
-            ${{ github.workspace }}/blazorapp/tests/UnitTests/obj
-          key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
-            ${{ runner.os }}-nuget-cache-
-      
-      - name: Debug Cache
-        run: |
-          echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
-          ls -R ${{ github.workspace }}/blazorapp/src
-          ls -R ${{ github.workspace }}/blazorapp/tests
+      - name: Install dependencies
+        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
 
-      - name: Debug Cache Key
-        run: |
-          echo "Cache Key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}"
-          
-      - name: Install dependencies (if cache not found)
-        if: steps.cache-nuget.outputs.cache-hit != 'true'
-        run: |
-          dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln" --verbosity normal
-          dotnet restore "${{ github.workspace }}/blazorapp/tests/UnitTests/UnitTests.csproj" --verbosity normal
-#              
       - name: Build
         run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
 
