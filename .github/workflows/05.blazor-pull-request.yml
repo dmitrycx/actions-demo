@@ -60,7 +60,9 @@ jobs:
           
       - name: Install dependencies (if cache not found)
         if: steps.cache-nuget.outputs.cache-hit != 'true'
-        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+        run: |
+          dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln" --verbosity-normal
+          dotnet restore "${{ github.workspace }}/blazorapp/tests/UnitTests/UnitTests.csproj" --verbosity-normal
 #              
       - name: Build
         run: dotnet build "${{ github.workspace }}/blazorapp/BlazorApp.sln" --configuration Release --no-restore
