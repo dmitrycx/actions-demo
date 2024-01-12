@@ -52,6 +52,7 @@ jobs:
         run: |
           echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
           ls -R ${{ github.workspace }}/blazorapp/src
+          ls -R ${{ github.workspace }}/blazorapp/tests
 
       - name: Debug Cache Key
         run: |
