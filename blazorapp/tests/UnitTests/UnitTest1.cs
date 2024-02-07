@@ -2,7 +2,7 @@ namespace UnitTests;
 
 public class UnitTest1
 {
-    uncomment before demo
+    // uncomment before demo
     [Fact]
     public void ShouldFail()
     {
