@@ -38,11 +38,6 @@ jobs:
           JOB_CONTEXT: ${{ toJSON(job) }}
         run: echo "$JOB_CONTEXT"
       
-      - name: Steps context
-        env:
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      
       - name: Runner context
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
