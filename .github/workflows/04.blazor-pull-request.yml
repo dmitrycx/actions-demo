@@ -25,8 +25,8 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Install dependencies
-        run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
+      # - name: Install dependencies
+      #   run: dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln"
       
       
       #       UNCOMMENT TO SHOW CACHING
