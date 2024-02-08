@@ -30,27 +30,27 @@ jobs:
       
       
       #       UNCOMMENT TO SHOW CACHING
-      # - name: Restore NuGet packages
-      #   id: cache-nuget
-      #   uses: actions/cache@v3.3.2
-      #   with:
-      #     path: |
-      #       ${{ github.workspace }}/blazorapp/.nuget
-      #       ${{ github.workspace }}/blazorapp/**/obj
-      #       ${{ github.workspace }}/blazorapp/**/bin
-      #     key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
-      #       ${{ runner.os }}-nuget-cache-
+      - name: Restore NuGet packages
+        id: cache-nuget
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            ${{ github.workspace }}/blazorapp/.nuget
+            ${{ github.workspace }}/blazorapp/**/obj
+            ${{ github.workspace }}/blazorapp/**/bin
+          key: ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-cache-${{ hashFiles('**/*.csproj') }}
+            ${{ runner.os }}-nuget-cache-
 
-      # - name: Debug Cache
-      #   run: |
-      #     echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
-      #     ls -R ${{ github.workspace }}/blazorapp
+      - name: Debug Cache
+        run: |
+          echo "Cache hit: ${{ steps.cache-nuget.outputs.cache-hit }}"
+          ls -R ${{ github.workspace }}/blazorapp
 
-      # - name: Install dependencies
-      #   run: |
-      #     dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln" --packages .nuget --verbosity normal
+      - name: Install dependencies
+        run: |
+          dotnet restore "${{ github.workspace }}/blazorapp/BlazorApp.sln" --packages .nuget --verbosity normal
       #        
 
       - name: Build
@@ -60,7 +60,7 @@ jobs:
         run: |
           dotnet test "${{ github.workspace }}/blazorapp/BlazorApp.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
 
-# #       UNCOMMENT TO SHOW CUSTOM ACTIONS
+#        UNCOMMENT TO SHOW CUSTOM ACTIONS
       - name: Test Report
         uses: dorny/test-reporter@v1.7.0
         if: success() || failure()    # run this step even if previous step failed
@@ -74,7 +74,7 @@ jobs:
         uses: dmitrycx/labeler@v1.0.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
-       
+#       
       - name: Publish
         run: |
           dotnet publish "${{ github.workspace }}/blazorapp/src/BlazorApp/BlazorApp.csproj" -c Release -o blazorapp
