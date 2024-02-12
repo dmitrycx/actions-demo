@@ -73,7 +73,6 @@ jobs:
       url: 'https://blazorapp-actions-dev.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v4
 
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
@@ -110,7 +109,6 @@ jobs:
       url: 'https://blazorapp-actions-qa.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v4
 
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
@@ -148,7 +146,6 @@ jobs:
       url: 'https://blazorapp-actions.azurewebsites.net'
 
     steps:
-      - uses: actions/checkout@v4
 
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
