@@ -3,7 +3,7 @@ namespace UnitTests;
 public class UnitTest1
 {
     // uncomment before demo
-    [Fact]
+    // [Fact]
     // public void ShouldFail()
     // {
     //     Assert.True(false);
