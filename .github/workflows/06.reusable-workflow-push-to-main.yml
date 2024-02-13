@@ -25,7 +25,6 @@ jobs:
       slot: dev
       env: DEV
     secrets:
-      token: ${{ secrets.GH_TOKEN }}
       creds: ${{ secrets.AZURE_CREDENTIALS }}
       
   deploy-QA:
@@ -36,7 +35,6 @@ jobs:
       slot: qa
       env: QA
     secrets:
-      token: ${{ secrets.GH_TOKEN }}
       creds: ${{ secrets.AZURE_CREDENTIALS }}
       
   deploy-PROD:
@@ -48,5 +46,4 @@ jobs:
       url: 'https://blazorapp-actions.azurewebsites.net'
       env: PROD
     secrets:
-      token: ${{ secrets.GH_TOKEN }}
       creds: ${{ secrets.AZURE_CREDENTIALS }}
