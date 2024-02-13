@@ -44,11 +44,11 @@ jobs:
       #     path: ${{ github.workspace }}/blazorapp/tests/UnitTests/TestResults/*.trx    # Path to test results
       #     reporter: dotnet-trx
 
-      - name: Label PR based on criteria
-        id: labeler
-        uses: dmitrycx/labeler@v1.0.0
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
+      # - name: Label PR based on criteria
+      #   id: labeler
+      #   uses: dmitrycx/labeler@v1.0.0
+      #   with:
+      #     github-token: ${{ secrets.GH_TOKEN }}  # Use the secret as the input
 #       
       - name: Publish
         run: |
