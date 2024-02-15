@@ -18,7 +18,7 @@ on:
 jobs:
   # This workflow contains a single job called "greet"
   greet:
-THE FOLLOWING LINE SHOULD BE COMMENTED OUT AT THE BEGINNING OF THE DEMO
+# THE FOLLOWING LINE SHOULD BE COMMENTED OUT AT THE BEGINNING OF THE DEMO
     strategy:
       matrix:
         os:
