@@ -36,13 +36,13 @@ jobs:
           dotnet test "${{ github.workspace }}/blazorapp/BlazorApp.sln" --no-restore --verbosity normal  --logger "trx;LogFileName=test-results.trx"
 
 # #        UNCOMMENT TO SHOW CUSTOM ACTIONS
-      # - name: Test Report
-      #   uses: dorny/test-reporter@v1.7.0
-      #   if: success() || failure()    # run this step even if previous step failed
-      #   with:
-      #     name: XUnit Tests            # Name of the check run which will be created
-      #     path: ${{ github.workspace }}/blazorapp/tests/UnitTests/TestResults/*.trx    # Path to test results
-      #     reporter: dotnet-trx
+      - name: Test Report
+        uses: dorny/test-reporter@v1.7.0
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: XUnit Tests            # Name of the check run which will be created
+          path: ${{ github.workspace }}/blazorapp/tests/UnitTests/TestResults/*.trx    # Path to test results
+          reporter: dotnet-trx
 
       # - name: Label PR based on criteria
       #   id: labeler
