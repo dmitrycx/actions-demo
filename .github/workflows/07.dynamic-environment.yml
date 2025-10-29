@@ -1,0 +1,27 @@
+name: Demo 07 - Dynamic Environment
+
+on:
+  workflow_dispatch:   # run manually for clarity
+    inputs:
+      branch:
+        description: 'Branch or tag name for demo'
+        required: true
+        default: 'test-env'
+
+jobs:
+  hello-env:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write  # required to create environments
+
+    environment:
+      name: demo-${{ github.event.inputs.branch }}
+      url: https://example.invalid/${{ github.event.inputs.branch }}
+
+    steps:
+      - name: Say Hello
+        run: |
+          echo "Hello from dynamic environment!"
+          echo "Environment name: demo-${{ github.event.inputs.branch }}"
+          echo "Branch input: ${{ github.event.inputs.branch }}"
