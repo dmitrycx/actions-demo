@@ -1,7 +1,8 @@
+# .github/workflows/demo-07-dynamic-environment.yml
 name: Demo 07 - Dynamic Environment
 
 on:
-  workflow_dispatch:   # run manually for clarity
+  workflow_dispatch:
     inputs:
       branch:
         description: 'Branch or tag name for demo'
@@ -13,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write  # required to create environments
+      deployments: write
 
     environment:
       name: demo-${{ github.event.inputs.branch }}
