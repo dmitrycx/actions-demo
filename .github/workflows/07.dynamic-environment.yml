@@ -5,21 +5,19 @@ on:
   workflow_dispatch:
     inputs:
       env_name:
-        description: 'Environment name to create/use (alphanumeric/dashes recommended)'
+        description: 'Environment name to create/use'
         required: true
-        default: 'test-env'
+        default: test-env
 
 jobs:
   hello-env:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write   # lets the job create/update the environment
+      deployments: write
 
-    # This is the key: use the input to name the environment dynamically.
     environment:
       name: ${{ github.event.inputs.env_name }}
-      # optional: shows a clickable “View deployment” link on the run
       url: https://example.invalid/${{ github.event.inputs.env_name }}
 
     steps:
@@ -27,8 +25,3 @@ jobs:
         run: |
           echo "Environment name: ${{ github.event.inputs.env_name }}" >> "$GITHUB_STEP_SUMMARY"
           echo "URL: https://example.invalid/${{ github.event.inputs.env_name }}" >> "$GITHUB_STEP_SUMMARY"
-      - name: Prove environment vars exist
-        run: |
-          echo "CI_ENVIRONMENT_NAME=$GITHUB_ENVIRONMENT"
-          # ^ not set by default; Actions doesn't export CI_* like GitLab
-          echo "This run will create the environment if it doesn't exist."
