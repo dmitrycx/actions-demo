@@ -2,26 +2,23 @@
 name: Demo 07 - Dynamic Environment
 
 on:
-  workflow_dispatch:
-    inputs:
-      env_name:
-        description: 'Environment name to create/use'
-        required: true
-        default: test-env
+  create:            # auto trigger on new branch
+  workflow_dispatch: # manual trigger for testing
 
 jobs:
-  hello-env:
+  create-env-on-branch-create:
+    if: github.event_name == 'create' && github.event.ref_type == 'branch'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
 
     environment:
-      name: ${{ github.event.inputs.env_name }}
-      url: https://example.invalid/${{ github.event.inputs.env_name }}
+      name: ${{ github.event.ref }}
+      url: https://example.invalid/${{ github.event.ref }}
 
     steps:
-      - name: Summarize
+      - name: Summary
         run: |
-          echo "Environment name: ${{ github.event.inputs.env_name }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "URL: https://example.invalid/${{ github.event.inputs.env_name }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Created/updated environment: **${{ github.event.ref }}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL: https://example.invalid/${{ github.event.ref }}" >> "$GITHUB_STEP_SUMMARY"
